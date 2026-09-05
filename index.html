@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ระบบบันทึกสินค้าเสียหาย - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- 1. Header Card -->
+    <div class="card header-card">
+      <div class="header-title">
+        <div class="header-icon">📦</div>
+        <div class="header-text">
+          <h1>ระบบบันทึกสินค้าเสียหาย</h1>
+          <p>จัดการ และติดตามสถานะเคสสินค้าชำรุดเสียหายในคลังและหน้าร้าน</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-icon-only" title="จัดการสิทธิ์ / ปลดล็อก">🔒</button>
+        <button class="btn btn-primary">➕ แจ้งสินค้าเสียหาย</button>
+      </div>
+    </div>
+
+    <!-- 2. KPI Summary Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">เคสทั้งหมด</div>
+        <div class="value">12</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">New (ใหม่)</div>
+        <div class="value" style="color: var(--status-new)">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">In Progress (กำลังดำเนินการ)</div>
+        <div class="value" style="color: var(--status-in-progress)">5</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Pending (รอตรวจสอบ)</div>
+        <div class="value" style="color: var(--status-pending)">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Closed (เสร็จสิ้น)</div>
+        <div class="value" style="color: var(--status-closed)">7</div>
+      </div>
+    </div>
+
+    <!-- 3. Filter & Search Toolbar -->
+    <div class="card">
+      <div class="status-tabs">
+        <button class="tab-btn">ทั้งหมด (12)</button>
+        <button class="tab-btn">New (0)</button>
+        <button class="tab-btn">In Progress (5)</button>
+        <button class="tab-btn">Pending (0)</button>
+        <button class="tab-btn">Resolved (0)</button>
+        <button class="tab-btn active">Closed (7)</button>
+      </div>
+
+      <div class="filter-controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="ค้นหาด้วย MC, IO, CSP หรือชื่อร้านค้า..." />
+        </div>
+
+        <select class="select-control">
+          <option>ทุกแผนก (Department)</option>
+          <option>คลังสินค้า (Warehouse)</option>
+          <option>หน้าร้าน (Store)</option>
+          <option>จัดส่ง (Logistics)</option>
+        </select>
+
+        <select class="select-control">
+          <option>ผู้สร้างรายการทั้งหมด</option>
+          <option>สมชาย ใจดี</option>
+          <option>วิภาดา รักดี</option>
+        </select>
+
+        <select class="select-control">
+          <option>2026</option>
+          <option>2025</option>
+        </select>
+
+        <div style="display:flex; align-items:center; gap:6px; font-size:0.875rem; color:var(--text-muted); margin-left:auto;">
+          <span>รายการ/หน้า</span>
+          <select class="select-control" style="padding: 8px 10px;">
+            <option>25</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Data Table -->
+    <div class="card" style="padding: 10px 24px 20px 24px;">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>วันที่</th>
+              <th>ร้านค้า</th>
+              <th>MC</th>
+              <th>IO</th>
+              <th>CSP</th>
+              <th>แผนก</th>
+              <th>ผู้สร้าง</th>
+              <th>รายละเอียด</th>
+              <th>สถานะ</th>
+              <th style="text-align: center;">จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Mock Record 1 -->
+            <tr>
+              <td>05/09/2026</td>
+              <td>ร้านค้า A (สาขาหลัก)</td>
+              <td>MC-8821</td>
+              <td>IO-40912</td>
+              <td>CSP-102</td>
+              <td>คลังสินค้า</td>
+              <td>สมชาย ใจดี</td>
+              <td>กล่องบุบ ชำรุดจากการขนส่ง</td>
+              <td><span class="badge badge-closed">Closed</span></td>
+              <td style="text-align: center;">
+                <button class="action-btn" title="ดูรายละเอียด/แก้ไข">✏️</button>
+              </td>
+            </tr>
+            <!-- Mock Record 2 -->
+            <tr>
+              <td>04/09/2026</td>
+              <td>ร้านค้า B (สาขาบางนา)</td>
+              <td>MC-1042</td>
+              <td>IO-30219</td>
+              <td>CSP-088</td>
+              <td>หน้าร้าน</td>
+              <td>วิภาดา รักดี</td>
+              <td>สินค้าหมดอายุบนชั้นวาง</td>
+              <td><span class="badge badge-in-progress">In Progress</span></td>
+              <td style="text-align: center;">
+                <button class="action-btn" title="ดูรายละเอียด/แก้ไข">✏️</button>
+              </td>
+            </tr>
+            <!-- Mock Record 3 -->
+            <tr>
+              <td>01/09/2026</td>
+              <td>ร้านค้า C (สาขารังสิต)</td>
+              <td>MC-5590</td>
+              <td>IO-11029</td>
+              <td>CSP-210</td>
+              <td>จัดส่ง</td>
+              <td>สมชาย ใจดี</td>
+              <td>บรรจุภัณฑ์แตกหักระหว่างย้ายคลัง</td>
+              <td><span class="badge badge-closed">Closed</span></td>
+              <td style="text-align: center;">
+                <button class="action-btn" title="ดูรายละเอียด/แก้ไข">✏️</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
